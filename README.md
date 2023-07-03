@@ -156,6 +156,9 @@ Create the code needed in `server.js` to sync the Sequelize models to the MySQL 
 7) demonstrate GET routes for a single category, a single product, and a single tag being tested in Insomnia.
 8) demonstrate POST, PUT, and DELETE routes for categories, products, and tags being tested in Insomnia.
 
+SUBMIT 1) A walkthrough video demonstrating the functionality of the application and all of the acceptance criteria being met.
+       2) The URL of the GitHub repository. Give the repository a unique name and include a readme describing the project.
+
 ### Technical Acceptance Criteria: 40%
 
 * Satisfies all of the preceding acceptance criteria plus the following:
@@ -181,14 +184,3 @@ Create the code needed in `server.js` to sync the Sequelize models to the MySQL 
 * Repository contains multiple descriptive commit messages.
 
 * Repository contains quality readme with description and a link to a walkthrough video.
-
-## Review
-
-You are required to submit BOTH of the following for review:
-
-* A walkthrough video demonstrating the functionality of the application and all of the acceptance criteria being met.
-
-* The URL of the GitHub repository. Give the repository a unique name and include a readme describing the project.
-
----
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
