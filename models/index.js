@@ -27,14 +27,16 @@ Category.hasMany(Product, {
 //Note: It is possible that the foreignKey of 1 of the above 2 is incorrect (prob for 'Category'), although Dane did specifically say to use category_id.
 
 // Products belongToMany Tags (through ProductTag)
-Product.belongsTo(Tag, {
+Product.belongsToMany(Tag, {
   through: ProductTag,
+  as: 'product_tags',
   foreignKey: 'product_id'
 });
 
 // Tags belongToMany Products (through ProductTag)
-Tag.belongsTo(Product, {
+Tag.belongsToMany(Product, {
   through: ProductTag,
+  as: 'product_tags',
   foreignKey: 'tag_id'
 });
 

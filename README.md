@@ -5,8 +5,8 @@
 • configure a working Express.js API to use Sequelize to interact with a MySQL database.
 • provide walkthrough vid
 • using functional Express.js API, WHEN adding my database name, MySQL username, and MySQL password to an environment (env file?) variable file, ble to connect to a database using Sequelize.
-• Enter schemaing and seed commands and a development database is created and is seeded with test data
-• WHEN I enter the command to invoke the application, server is started and the Sequelize models are synced to the MySQL database
+• Entering schema and seed commands and a development database is created and is seeded with test data
+• WHEN I enter the command npm run start to invoke the application, server is started and the Sequelize models are synced to the MySQL database
 • WHEN I open API GET routes in Insomnia for categories, products, or tags the data for each of these routes is displayed in a formatted JSON
 • WHEN I test API POST, PUT, and DELETE routes in Insomnia, able to successfully create, update, and delete data in my database
 • SEE VID for demo
