@@ -24,7 +24,7 @@ Category.hasMany(Product, {
   foreignKey: 'category_id'
 });
 
-//Note: It is possible that the foreignKey of 1 of the above 2 is incorrect (prob for 'Category')
+//Note: It is possible that the foreignKey of 1 of the above 2 is incorrect (prob for 'Category'), although Dane did specifically say to use category_id.
 
 // Products belongToMany Tags (through ProductTag)
 Product.belongsTo(Tag, {
@@ -35,7 +35,7 @@ Product.belongsTo(Tag, {
 // Tags belongToMany Products (through ProductTag)
 Tag.belongsTo(Product, {
   through: ProductTag,
-  foreignKey: 'product_id'
+  foreignKey: 'tag_id'
 });
 
 module.exports = {
