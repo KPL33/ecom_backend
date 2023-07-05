@@ -1,11 +1,16 @@
-// import important parts of sequelize library
+//This file defines how the data of each 'Product' in our database should be handled.
+
+//Here, we import the 'Model' and 'DataTypes' objects from the 'sequelize' library, which we'll need to work with our 'sequelize' 'models'.
 const { Model, DataTypes } = require('sequelize');
-// import our database connection from config.js
+
+//Here, we import the 'sequelize' instance, which enables connection to our database.
 const sequelize = require('../config/connection');
+
+
 const Tag = require('./Tag')
 const ProductTag = require('./ProductTag');
 
-// Initialize Product model (table) by extending off Sequelize's Model class
+//The below extends 'sequelize's built-in 'Model' 'class'.
 class Product extends Model { }
 
 //Here, we have set up the fields and rules for the 'Product' 'Model'.

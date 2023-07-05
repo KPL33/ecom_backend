@@ -7,19 +7,21 @@
 //Don't forget... we are using SEQUELIZE, not just sql.
 
 // import models
+//Here, we 'require' the 4 tables of data listed (which reside in our 'models' folder) so that they can be referenced below.
 const Product = require('./Product');
 const Category = require('./Category');
 const Tag = require('./Tag');
 const ProductTag = require('./ProductTag');
 
 // Products belongsTo Category
-//Each product has 1 category
+//Here, we declare that each 'Product' has 1 'Category' that it 'belongsTo'. Another way to put it is that each 'Product' has a "1-to-1 relationship" with a 'Category'.
 Product.belongsTo(Category, {
+  //Here, we establish that the 'foreignKey' for each 'Product' is accessed by reading the value in the (primary key) 'id' column, in the table named 'category'. In this way, we get each 'Product' the correct 'id' for the 'category' to which it belongs.
   foreignKey: 'category_id'
 });
 
 // Categories have many Products
-//1 category has many products
+//This declaration essentially does the opposite of the above, declaring that each 'Category' 'hasMany' 'Product's in it. By usi
 Category.hasMany(Product, {
   foreignKey: 'category_id'
 });
