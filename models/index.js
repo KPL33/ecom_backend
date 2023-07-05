@@ -4,8 +4,6 @@
 
 //Check: Do I need to 'require' those in this index.js (or the other one, or neither)?
 
-//Don't forget... we are using SEQUELIZE, not just sql.
-
 // import models
 //Here, we 'require' the 4 tables of data listed (which reside in our 'models' folder) so that they can be referenced below.
 const Product = require('./Product');

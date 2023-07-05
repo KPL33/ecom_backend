@@ -1,4 +1,4 @@
-//This file defines how the data of each 'Product' in our database should be handled.
+//This file defines how the data of each 'Product' that is being sold in our database should be handled.
 
 //Here, we import the 'Model' and 'DataTypes' objects from the 'sequelize' library, which we'll need to work with our 'sequelize' 'models'.
 const { Model, DataTypes } = require('sequelize');
@@ -6,7 +6,7 @@ const { Model, DataTypes } = require('sequelize');
 //Here, we import the 'sequelize' instance, which enables connection to our database.
 const sequelize = require('../config/connection');
 
-
+// These lines import the 'Tag' and 'ProductTag' models from their respective files. These models are 'require'd in this file because 'Product', will be used to define associations with the Product model.
 const Tag = require('./Tag')
 const ProductTag = require('./ProductTag');
 
@@ -31,7 +31,7 @@ Product.init(
     price: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
-      //Here, we allow only 'price' 'value's in that adhere to our "math base" and 'DECIMAL' rules established above.
+      //Here, we allow only 'price' 'value's that adhere to our "math base" and 'DECIMAL' rules established above.
       validate: {
         isDecimal: true
       }

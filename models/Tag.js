@@ -1,11 +1,23 @@
+//This file defines how the data of each 'Tag' (AKA, "descriptive details about") each 'Product' in our database should be handled.
+
+//Here, we import the 'Model' and 'DataTypes' objects from the 'sequelize' library, which we'll need to work with our 'sequelize' 'models'.
 const { Model, DataTypes } = require('sequelize');
 
+//Here, we import the 'sequelize' instance, which enables connection to our database.
 const sequelize = require('../config/connection.js');
+
+//The below extends 'sequelize's built-in 'Model' 'class'.
+
+const Product = require('./Product')
+const ProductTag = require('./ProductTag');
 
 class Tag extends Model {}
 
+//We call the 'init' method on our 'Tag' 'Model', passing the method two objects as arguments: 1) Attributes of the columns 'id' (the 'primaryKey' of this table) and 'tag_name' are defined here, showing rules for and what types of data to expect in those columns...
+
 Tag.init(
   {
+    //Each of the following 'objects' can be considered columns in our overall table and each has its own set of rules for the data it stores.
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -16,6 +28,7 @@ Tag.init(
       type: DataTypes.STRING
     }
   },
+  //...and 2) Features and options that we can use on that data by leveraging the 'sequelize' library, including establishing the 'modelName' in a way that 'sequelize' can reference.
   {
     sequelize,
     timestamps: false,
@@ -25,4 +38,11 @@ Tag.init(
   }
 );
 
+// Tag.belongsToMany(Product, {
+//   through: ProductTag,
+//   foreignKey: 'tag_id',
+//   as: 'tags',
+// });
+
+//Finally, we 'export' the 'Category' 'Model', so that it can be imported into our 'models > index.js' file.
 module.exports = Tag;

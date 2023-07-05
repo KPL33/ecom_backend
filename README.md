@@ -4,9 +4,9 @@
 • build back end for e-commerce site.
 • configure a working Express.js API to use Sequelize to interact with a MySQL database.
 • provide walkthrough vid
-• using functional Express.js API, WHEN adding my database name, MySQL username, and MySQL password to an environment (env file?) variable file, ble to connect to a database using Sequelize.
-• Entering schema and seed commands and a development database is created and is seeded with test data
-• WHEN I enter the command npm run start to invoke the application, server is started and the Sequelize models are synced to the MySQL database
+√ using functional Express.js API, WHEN adding my database name, MySQL username, and MySQL password to an environment (env file?) variable file, able to connect to a database using Sequelize.
+√ Entering schema and seed commands and a development database is created and is seeded with test data
+√ WHEN I enter the command `npm run start` to invoke the application, server is started and the Sequelize models are synced to the MySQL database
 • WHEN I open API GET routes in Insomnia for categories, products, or tags the data for each of these routes is displayed in a formatted JSON
 • WHEN I test API POST, PUT, and DELETE routes in Insomnia, able to successfully create, update, and delete data in my database
 • SEE VID for demo
@@ -15,7 +15,7 @@
 √ [MySQL2](https://www.npmjs.com/package/mysql2)
 √ [Sequelize](https://www.npmjs.com/package/sequelize) packages to connect your Express.js API to a MySQL database and the [dotenv](https://www.npmjs.com/package/dotenv) package to use environment variables to store sensitive data.
 
-• Use the `schema.sql` file in the `db` folder to create your database with MySQL shell commands. Use environment variables to store sensitive data like your MySQL username, password, and database name.
+√ Use the `schema.sql` file in the `db` folder to create your database with MySQL shell commands. Use environment variables to store sensitive data like your MySQL username, password, and database name.
 
 ### Database Models
 
