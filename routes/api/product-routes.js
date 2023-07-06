@@ -4,6 +4,8 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 // The `/api/products` endpoint
 
 // get all products
+
+//Here, we establish a 'route' that can return 'get' 'All' 'products' when we query. We also 'include' the 'category' with which the 'Product' is associated in the JSON data that is retrieved and it displays in our results. Lastly, we provide a 'catch' block that returns a 'status 500' 'res'ponse, in the event of an 'err'or.
 router.get('/', (req, res) => {
   Product.findAll({
     include: [
@@ -21,14 +23,10 @@ router.get('/', (req, res) => {
     });
 });
 
-
-// get one product
+//Similar to the above, we establish a 'route' that can return information on a single 'Product' when we query (accessed by using the '/products' endpoint followed by '/' and the the 'id' number assigned to the item being queried). We also provide a message that will show, in the event that the 'product' being queried does not exist.
 router.get('/:id', async (req, res) => {
-  // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
   try {
     const productData = await Product.findByPk(req.params.id);
-    //Do I need to follow the mini-project, do someting similar to "JOIN with locations, using the Trip through table"?
 
     if (!productData) {
       res.status(404).json({ message: 'No product found with this ID.' });
@@ -41,7 +39,8 @@ router.get('/:id', async (req, res) => {
     res.status(500).json(err);
   }
 });
-// create new product
+
+//Here, we provide the user with a 'route' that enables them to 'create' a new 'product' and a 'catch' block with that returns a 'res'ponse, in the event of an 'err'or.
 router.post('/', (req, res) => {
   /* req.body should look like this...
     {
@@ -81,6 +80,7 @@ router.put('/:id', (req, res) => {
       id: req.params.id,
     },
   })
+  
     .then((product) => {
       if (req.body.tagIds && req.body.tagIds.length) {
 

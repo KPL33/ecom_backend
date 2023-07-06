@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Category, Product, Tag, ProductTag } = require('../../models');
 
-//Here, we establish a 'route' that can return 'All' 'categories' when we query. We also 'include' the associated 'product_name's in the JSON data that is retrieved and it displays in our results. Lastly, we provide a 'catch' block that returns a 'status 500' 'res'ponse, in the event of an 'err'or.
+//Here, we establish a 'route' that can return 'get' 'All' 'categories' when we query. We also 'include' the associated 'product_name's in the JSON data that is retrieved and it displays in our results. Lastly, we provide a 'catch' block that returns a 'status 500' 'res'ponse, in the event of an 'err'or.
 router.get('/', async (req, res) => {
   try {
     const categoryData = await Category.findAll({
@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-//Similar to the above, we establish a 'route' that can return a single 'Category' when we query (accessed by using the '/categories' endpoint followed by '/' and the the 'id' number assigned to the item being queried).
+//Similar to the above, we establish a 'route' that can return a single 'Category' when we query (accessed by using the '/categories' endpoint followed by '/' and the the 'id' number assigned to the item being queried). We also provide a message that will show, in the event that the 'category' being queried does not exist.
 router.get('/:id', async (req, res) => {
   try {
     const categoryData = await Category.findByPk(req.params.id, {
@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-//Here, we provide the user with a 'route' that enables them to create a new 'category' and a 'catch' block with that returns a 'res'ponse, in the event of an 'err'or.
+//Here, we provide the user with a 'route' that enables them to 'create' a new 'category' and a 'catch' block with that returns a 'res'ponse, in the event of an 'err'or.
 router.post('/', async (req, res) => {
   // create a new category
   try {

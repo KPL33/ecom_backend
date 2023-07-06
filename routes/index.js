@@ -1,4 +1,4 @@
-//This file further sets up our middleware, importing the 'index.js' file from our '/api' folder, which bundled all of the routes utilized by our GET, POST, PUT and DELETE methods. It adds-on to this 'bundle', by providing code that will generated an '<h1>' element for the user to see, in the event that they are querying with an invalid 'route'.files, routes > index.js. It then exports this updated bundle to be utilized by our 'hub', at '../server.js'.
+//This file further sets up our middleware, importing the 'index.js' file from our '/api' folder, which "bundled" all of the routes utilized by our GET, POST, PUT and DELETE methods. It adds-on to that "bundle", by generating an '<h1>' element for the user to see, in the event that they are querying via an invalid 'route'. This updated "bundle" is then exported, to be utilized by the '../server.js' file.
 const router = require('express').Router();
 const apiRoutes = require('./api');
 
