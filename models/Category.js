@@ -1,4 +1,4 @@
-//This file defines how the 'Category' data of each 'Product' in our database should be handled.
+//Each 'Product' falls under 1 category. This file defines how the 'Category' data of each 'Product' in our database should be handled.
 
 //Here, we import the 'Model' and 'DataTypes' objects from the 'sequelize' library, which we'll need to work with our 'sequelize' 'models'.
 const { Model, DataTypes } = require('sequelize');

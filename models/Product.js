@@ -6,7 +6,7 @@ const { Model, DataTypes } = require('sequelize');
 //Here, we import the 'sequelize' instance, which enables connection to our database.
 const sequelize = require('../config/connection');
 
-// These lines import the 'Tag' and 'ProductTag' models from their respective files. These models are 'require'd in this file because 'Product', will be used to define associations with the Product model.
+//Since 'Tag','Product' and 'ProductTag' are all dependent on each other in order to properly handle their own data, we 'require' the other 2 files and provide a path to them here.
 const Tag = require('./Tag')
 const ProductTag = require('./ProductTag');
 
@@ -36,7 +36,7 @@ Product.init(
         isDecimal: true
       }
     },
-    //Similar to 'price' we 'validte' that the 'value' 'isNumeric' and give the stored 'stock' data a 'defaultValue'.
+    //Similar to 'price' we 'validate' that the number of 'products' in-'stock'  'isNumeric' and give the stored 'stock' data a 'defaultValue' of 10.
     stock: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -69,4 +69,5 @@ Product.belongsToMany(Tag, {
   as: 'tags',
 });
 
+//Finally, we 'export' the 'Product' 'Model', so that it can be imported into our 'models > index.js' file.
 module.exports = Product;

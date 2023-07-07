@@ -33,7 +33,6 @@ router.get('/:id', async (req, res) => {
 
 //Here, we provide the user with a 'route' that enables them to 'create' a new 'category' and a 'catch' block with that returns a 'res'ponse, in the event of an 'err'or.
 router.post('/', async (req, res) => {
-  // create a new category
   try {
     const categoryData = await Category.create(req.body);
     res.status(200).json(categoryData);
@@ -60,7 +59,6 @@ router.put('/:id', async (req, res) => {
 
 //Here, we enable the user to delete an existing 'category' by querying database with that category's name. We also we provide a 'catch' block that returns a 'status 404' 'err'or 'res'ponse, in the event that the user queries for a category that does not yet exist in the database and a 'status 500' 'err'or, in the event that anything else goes awry.
 router.delete('/:id', async (req, res) => {
-  // delete a category by its `id` value
   try {
     const categoryData = await Category.destroy({
       where: {
