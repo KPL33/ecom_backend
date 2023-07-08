@@ -41,7 +41,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-//Here, we enable the user to update the database by querying for an existing 'category'.
+//Here, we enable the user to update an existing 'category'.
 router.put('/:id', async (req, res) => {
   try {
     const categoryData = await Category.findByPk(req.params.id);

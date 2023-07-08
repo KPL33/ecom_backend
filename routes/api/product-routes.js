@@ -17,7 +17,8 @@ router.get('/', (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
-});
+  }
+);
 
 //Similar to the above, we establish a 'route' that can return information on a single 'Product' when queried (accessed by using the '/products' endpoint followed by '/' and the the 'id' number assigned to the item being queried). We also provide a message that will show, in the event that the 'product' being queried does not exist.
 router.get('/:id', async (req, res) => {
@@ -36,7 +37,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-//Here, we provide the user with a 'route' that enables them to 'create' a new 'product' and a 'catch' block with that returns a 'res'ponse, in the event of an 'err'or. The data of a "new product submission" could be received via JSON, as in this example:
+//Here, we provide the user with a 'route' that enables them to 'create' a new 'product' and a 'catch' block that returns a 'res'ponse, in the event of an 'err'or. The data of a "new product submission" could be received via JSON entered by the user, as in this example:
 // {
 //   product_name: "Basketball",
 //   price: 200.00,
@@ -46,44 +47,45 @@ router.get('/:id', async (req, res) => {
 router.post('/', (req, res) => {
   Product.create(req.body)
     .then((product) => {
-      //Here, we declare that 'if' there are 'tagIds' present in the user's request, there should be associated tags for the 'product', in which case creates a 'productTagIdArr'ay, containing the 'product_id' and 'tag_id' pairs.
+      //Here, we check 'if' the 'TagIdArr'ay already exists (has a 'length'/aka 'value' greater than 0). If the condition is true, the 'map' method is called on 'req.body.tagIds', transforming each 'tagId' into an array of objects containing the 'req'uired properties for creating associations between the 'product_id's and 'tag_id's.
       if (req.body.tagIds.length) {
-        //We then call the 'map' method on each 'tag_id'.
         const productTagIdArr = req.body.tagIds.map((tag_id) => {
-          //We then 'return' a new "object" for each item in the array. The "objects" will each cosist of a 'product_id' and 'tag_id'.
+          //We then 'return' a new "object" for each item in the array. The "objects" will each cosist of a 'product_id' and 'tag_id', pairing them together.
           return {
             product_id: product.id,
             tag_id,
           };
         });
-        //We then 'bulkCreate' new 'ProductTag's for each 'Tag' that appeared in our 'Arr'ay. These give us our associations between the 'Products' and 'Tag's.
+        //We then 'bulkCreate' new 'ProductTag's for each pair our 'productTagIdArr'ay, detailed above. The result is a unique 'Id' given to each individual instance of a 'Product', which we're calling 'ProductTag'.
         return ProductTag.bulkCreate(productTagIdArr);
       }
       res.status(200).json(product);
     })
+    //After the 'productTagIds' are created, we '200' 'res'sponse if the request was successful, or '400' should any 'err'or occur.
     .then((productTagIds) => res.status(200).json(productTagIds))
     .catch((err) => {
       console.log(err);
       res.status(400).json(err);
     });
-});
+  }
+);
 
-// update product
+//Here, we enable the user to 'update' an existing 'Product' via JSON submission, with values in the important keys for a given 'Product' ("product_name", "price", etc.). We also we provide a 'catch' block that returns a 'status 404' 'err'or 'res'ponse, in the event that the user queries for a 'product' that does not yet exist in the database and a 'status 500' 'err'or, in the event that anything else goes awry.
 router.put('/:id', async (req, res) => {
-  // update product data
+  
   Product.update(req.body, {
-    where: {
-      id: req.params.id,
-    },
-  })
+      where: {
+        id: req.params.id,
+      },
+    })
 
     .then((product) => {
       if (req.body.tagIds && req.body.tagIds.length) {
 
         ProductTag.findAll({
           where: { product_id: req.params.id }
-        }).then((productTags) => {
-          // create filtered list of new tag_ids
+          }).then((productTags) => {
+          
           const productTagIds = productTags.map(({ tag_id }) => tag_id);
           const newProductTags = req.body.tagIds
             .filter((tag_id) => !productTagIds.includes(tag_id))
@@ -92,29 +94,30 @@ router.put('/:id', async (req, res) => {
                 product_id: req.params.id,
                 tag_id,
               };
-            });
+          });
 
-          // figure out which ones to remove
+        
           const productTagsToRemove = productTags
             .filter(({ tag_id }) => !req.body.tagIds.includes(tag_id))
             .map(({ id }) => id);
-          // run both actions
-          return Promise.all([
-            ProductTag.destroy({ where: { id: productTagsToRemove } }),
-            ProductTag.bulkCreate(newProductTags),
-          ]);
+          
+            return Promise.all([
+              ProductTag.destroy({ where: { id: productTagsToRemove } }),
+              ProductTag.bulkCreate(newProductTags),
+            ]
+          );
         });
       }
 
       return res.json(product);
     })
     .catch((err) => {
-      // console.log(err);
       res.status(400).json(err);
-    });
+    }
+  );
 });
 
-//Here, we enable the user to delete an existing 'product' by querying database with that product's name. We also we provide a 'catch' block that returns a 'status 404' 'err'or 'res'ponse, in the event that the user queries for a 'product' that does not yet exist in the database and a 'status 500' 'err'or, in the event that anything else goes awry.
+//Here, we enable the user to delete (aka, 'destroy) an existing 'product' by querying database with that product's name. We also we provide a 'catch' block that returns a 'status 404' 'err'or 'res'ponse, in the event that the user queries for a 'product' that does not yet exist in the database and a 'status 500' 'err'or, in the event that anything else goes awry.
 router.delete('/:id', async (req, res) => {
 
   try {
