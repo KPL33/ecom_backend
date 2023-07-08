@@ -1,4 +1,4 @@
-//This file defines how the data of each 'Product' that is being sold in our database should be handled.
+//This file defines how the data of each 'Product' in our inventory should be handled.
 
 //Here, we import the 'Model' and 'DataTypes' objects from the 'sequelize' library, which we'll need to work with our 'sequelize' 'models'.
 const { Model, DataTypes } = require('sequelize');
@@ -63,11 +63,5 @@ Product.init(
   }
 );
 
-Product.belongsToMany(Tag, {
-  through: ProductTag,
-  foreignKey: 'product_id',
-  as: 'tags',
-});
-
-//Finally, we 'export' the 'Product' 'Model', so that it can be imported into our 'models > index.js' file.
+//Finally, we 'export' the 'Product' 'Model', so that it can be imported into our 'models/index.js' file.
 module.exports = Product;

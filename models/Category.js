@@ -23,7 +23,7 @@ Category.init(
       allowNull: false
     }
   },
-  //...and 2) Features and options that we can use on that data by leveraging the 'sequelize' library, including establishing the 'modelName' in a way that 'sequelize' can reference.
+  //...and 2) Features and options that we can used on that data by leveraging the 'sequelize' library, including establishing the 'modelName' in a way that 'sequelize' can reference.
   {
     sequelize,
     timestamps: false,
@@ -33,5 +33,5 @@ Category.init(
   }
 );
 
-//Finally, we 'export' the 'Category' 'Model', so that it can be imported into our 'models > index.js' file.
+//Finally, we 'export' the 'Category' 'Model', so that it can be imported into our 'models/index.js' file.
 module.exports = Category;

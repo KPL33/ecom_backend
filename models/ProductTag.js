@@ -1,4 +1,4 @@
-//We have MANY 'Products' and MANY 'Tags'. The 'ProductTag' 'Model' establishes a relationship between the 'Products' and 'Tags' in our database, assigning a unique 'id' to each instance of a 'product'. For example, if we have a 'Tag' that details that the article of clothing is 'red', and the article of clothing we're referring to is a 'hat', 'red' has an 'id' in the 'Tag' 'Model' and 'hat' has an 'id' in the 'Product' 'Model'. This instance gets an 'id' of its own. And if we changed that to a 'blue' 'hat', the 'ProductTag' 'Model' assigns a uniqu 'id' to the 'red hat' and a unique 'id' to the 'blue hat'. In this way, 'ProductTag' bridges the 'Product' and 'Tag' 'Models'. And this file defines how the data in that overall 'ProductTag' table should be handled.
+//We have MANY 'Products' and MANY 'Tags'. The 'ProductTag' 'Model' establishes a relationship between the 'Products' and 'Tags' in our database, assigning a unique 'id' to each instance of a 'Product' and 'Tag' pairing. For example, if we have a 'Tag' that describes 'blue', and the 'Product' we're referring to is a 'hat', ' blue' has an 'id' in the 'Tag' 'Model' and 'hat' has an 'id' in the 'Product' 'Model'. This instance (a 'blue hat') gets an 'id' of its own. And if we changed that to a 'green' 'hat', the 'ProductTag' 'Model' assigns another unique 'id' to the 'green hat' and a unique 'id' to the 'green hat'. In this way, 'ProductTag' bridges the 'Product' and 'Tag' 'Models'. And this file defines how the data in that overall 'ProductTag' table should be handled.
 
 //Here, we import the 'Model' and 'DataTypes' objects from the 'sequelize' library, which we'll need to work with our 'sequelize' 'models'.
 const { Model, DataTypes } = require('sequelize');
@@ -47,4 +47,5 @@ ProductTag.init(
   }
 );
 
+//Finally, we 'export' the 'ProductTag' 'Model', so that it can be imported into our 'models/index.js' file.
 module.exports = ProductTag;
