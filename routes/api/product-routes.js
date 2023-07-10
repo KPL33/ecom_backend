@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Product, Category, Tag, ProductTag } = require('../../models');
 
 //Here, we establish a 'route' that can 'get' (retrieve) 'All' 'products' when we query. We also 'include' the 'category' with which the 'Product' is associated in the JSON data that is retrieved and it displays in our results. Lastly, we provide a 'catch' block that returns a 'status 500' 'res'ponse, in the event of an 'err'or.
-// 'through' referencing our 'ProductTag's (aka, unique 'id's given to each individual 'Tag' in our inventory), we also 'include' the 'Tag's associated which the 'Product's in our query results. Lastly, we provide a 'catch' block that returns a 'status 500' 'res'ponse, in the event of an 'err'or.
+// 'through' referencing our 'ProductTag's (aka, unique 'id's given to each individual 'Tag' in our inventory), we also 'include' the 'Tag's associated with the 'Product's in our query results. Lastly, we provide a 'catch' block that returns a 'status 500' 'res'ponse, in the event of an 'err'or.
 router.get('/', (req, res) => {
   Product.findAll({
     include: [
@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
   }
 );
 
-//Similar to the above, we establish a 'route' that can return a single 'Product' when we query (accessed by using the '/products' endpoint followed by '/' and the the 'id' number assigned to the item being queried). We also provide a message that will show, in the event that the 'product' being queried does not exist.
+//Similar to the above, we establish a 'route' that can return a single 'Product' when we query (accessed by using the '/products' endpoint followed by '/' and the the 'id' number assigned to the item being queried). We also provide a message that will show in the event that the 'product' being queried does not exist.
 router.get('/:id', async (req, res) => {
   try {
     const productData = await Product.findByPk(req.params.id);
@@ -57,7 +57,7 @@ router.post('/', (req, res) => {
             tag_id,
           };
         });
-        //We then 'bulkCreate' new 'ProductTag's for each pair our 'productTagIdArr'ay, detailed above. The result is a unique 'Id' given to each individual instance of a 'Product', which we're calling 'ProductTag'.
+        //We then 'bulkCreate' new 'ProductTag's for each pair in our 'productTagIdArr'ay detailed above. The result is a unique 'Id' given to each individual instance of a 'Product', which we're calling 'ProductTag'.
         return ProductTag.bulkCreate(productTagIdArr);
       }
       res.status(200).json(product);
@@ -71,7 +71,7 @@ router.post('/', (req, res) => {
   }
 );
 
-//Here, we enable the user to 'update' an existing 'Product' via JSON submission, with values in the important keys for a given 'Product' ("product_name", "price", etc.). We also we provide a 'catch' block that returns a 'status 404' 'err'or 'res'ponse, in the event that the user queries for a 'product' that does not yet exist in the database and a 'status 500' 'err'or, in the event that anything else goes awry.
+//Here, we enable the user to 'update' an existing 'Product' via JSON submission, with values in the important keys for a given 'Product' ("product_name", "price", etc.). We also provide a 'catch' block that returns a 'status 404' 'err'or 'res'ponse, in the event that the user queries for a 'product' that does not yet exist in the database and a 'status 500' 'err'or, in the event that anything else goes awry.
 router.put('/:id', async (req, res) => {
   
   Product.update(req.body, {
@@ -118,7 +118,7 @@ router.put('/:id', async (req, res) => {
   );
 });
 
-//Here, we enable the user to delete (aka, 'destroy) an existing 'Product' by querying the database with that 'Product's name. We also we provide a 'catch' block that returns a 'status 404' 'err'or 'res'ponse, in the event that the user queries for a 'product' that does not yet exist in the database and a 'status 500' 'err'or, in the event that anything else goes awry.
+//Here, we enable the user to delete (aka, 'destroy) an existing 'Product' by querying the database with that 'Product's name. We also provide a 'catch' block that returns a 'status 404' 'err'or 'res'ponse, in the event that the user queries for a 'product' that does not yet exist in the database and a 'status 500' 'err'or, in the event that anything else goes awry.
 router.delete('/:id', async (req, res) => {
 
   try {

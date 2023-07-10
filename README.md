@@ -1,188 +1,65 @@
-# E-Commerce Back End
+# <span style="color: yellow;">***E-Commerce Back End***</span>
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+</br>
 
+## Overview
+This simple command-line application allows users to look-up, create, edit and delete records for products and descriptive tags for those products within an inventory database.
+</br>
 
-• build back end for e-commerce site.
-• configure a working Express.js API to use Sequelize to interact with a MySQL database.
-• provide walkthrough vid
-√ using functional Express.js API, WHEN adding my database name, MySQL username, and MySQL password to an environment (env file?) variable file, able to connect to a database using Sequelize.
-√ Entering schema and seed commands and a development database is created and is seeded with test data
-√ WHEN I enter the command `npm run start` to invoke the application, server is started and the Sequelize models are synced to the MySQL database
-• WHEN I open API GET routes in Insomnia for categories, products, or tags the data for each of these routes is displayed in a formatted JSON
-• WHEN I test API POST, PUT, and DELETE routes in Insomnia, able to successfully create, update, and delete data in my database
-• SEE VID for demo
+## Application Set-Up
+1) To get started, download this repo and in your terminal, from the root folder run... </br>
+  • "npm i" (to install the "Node Package Module" itself) and then run these additional "npm i" commands...</br>
+  • `mysql2`</br>
+  • `sequelize`</br>
+  • `express`</br>
+  • `dotenv`</br>
 
-• You’ll need to use the
-√ [MySQL2](https://www.npmjs.com/package/mysql2)
-√ [Sequelize](https://www.npmjs.com/package/sequelize) packages to connect your Express.js API to a MySQL database and the [dotenv](https://www.npmjs.com/package/dotenv) package to use environment variables to store sensitive data.
+2) Once the dependencies have been installed, use control-C or otherwise terminate operations and close this terminal.
 
-√ Use the `schema.sql` file in the `db` folder to create your database with MySQL shell commands. Use environment variables to store sensitive data like your MySQL username, password, and database name.
+3) You will see a ".env" file among your root files. Open it and fill in your log-on credentials between the '...' marks. Use 'root' for DB_USER, and your own mysql password for DB_PASSWORD.
 
-### Database Models
+4) Log-on using your mysql credentials, by entering `mysql -u root -p`. When prompted, enter your mysql password.
 
-Your database should contain the following four models, including the requirements listed for each model:
+5) In the  same terminal, enter `SOURCE db/schema.sql;` 
 
-* `Category`
+6) With your schema sourced, open a new terminal from your root directory and run `npm run seed`, to populate the tables with example data, which can be utilized for testing the app.
 
-  * `id`
+7) With your database seeded, run `npm run start` in the same terminal that you used in step 6. You should see the message <span style="color: yellow;">***"App listening on port 3001!"***</span> in your terminal.
 
-    * Integer.
-  
-    * Doesn't allow null values.
-  
-    * Set as primary key.
-  
-    * Uses auto increment.
+## Application Instructions
+To interact with the database, open an API client (Insomnia or similar) and use this main route for all queries and commands: http://localhost:3001/api</br>
+  • To retrieve data (send a `"GET"` query on) <span style="color: yellow;">**ALL**</span> Categories, Products or Tags, add either "/categories", "/products" or "/tags" as the endpoint of the above 'localhost' address, depending on the information you would like to see.</br>
+  • Each listing in your data has been assigned a numerical ID. To retrieve info on only a <span style="color: yellow;">**SINGLE**</span> Category, Product or Tag, use the appropriate end point detailed in the previous instruction, followed by "/", followed by the numerical ID assigned to each item.</br>
+  • Data will be returned to you as formatted JSON. To <span style="color: yellow;">**EDIT an existing entry**</span> (send a `"PUT"` query), use "/", followed by the numerical ID of the item you would like to edit. Be sure to include your edits in JSON format.</br>
+  • No numerical endpoint is necessary to <span style="color: yellow;">**create a new entry**</span> (`"POST"`), but be sure to include your edits in JSON format.</br>
+  • To <span style="color: yellow;">**REMOVE** (`"DELETE"`) **existing data**</span>, enter "/", followed by the id that was assigned to the item within the table from which you are deleting.</br>
+  <span style="color: red;">***Please note: Deleted data cannot be retrieved.***</span>
 
-  * `category_name`
-  
-    * String.
-  
-    * Doesn't allow null values.
+</br>
 
-* `Product`
+## Static Screen-Captures of the Application
+![mysql running in termial](./assets/example1.png)
+##
+![npm run seed entered in termial](./assets/example2.png)
+##
+![View routes through Insomnia](./assets/example3.png)
+</br>
 
-  * `id`
-  
-    * Integer.
-  
-    * Doesn't allow null values.
-  
-    * Set as primary key.
-  
-    * Uses auto increment.
+## Application Demo Video
+https://drive.google.com/file/d/1l5TUZc51bzmmrVT6lPgIiYGUayHnvL7G/view
 
-  * `product_name`
-  
-    * String.
-  
-    * Doesn't allow null values.
+</br>
 
-  * `price`
-  
-    * Decimal.
-  
-    * Doesn't allow null values.
-  
-    * Validates that the value is a decimal.
+## Contributors To This Application
+Kevin Lewis
 
-  * `stock`
-  
-    * Integer.
-  
-    * Doesn't allow null values.
-  
-    * Set a default value of `10`.
-  
-    * Validates that the value is numeric.
+</br>
 
-  * `category_id`
-  
-    * Integer.
-  
-    * References the `Category` model's `id`.
+# <span style="color: lightgreen;">***Thank you for using this App!***</span>
 
-* `Tag`
+</br>
 
-  * `id`
-  
-    * Integer.
-  
-    * Doesn't allow null values.
-  
-    * Set as primary key.
-  
-    * Uses auto increment.
-
-  * `tag_name`
-  
-    * String.
-
-* `ProductTag`
-
-  * `id`
-
-    * Integer.
-
-    * Doesn't allow null values.
-
-    * Set as primary key.
-
-    * Uses auto increment.
-
-  * `product_id`
-
-    * Integer.
-
-    * References the `Product` model's `id`.
-
-  * `tag_id`
-
-    * Integer.
-
-    * References the `Tag` model's `id`.
-
-### Associations
-
-You'll need to execute association methods on your Sequelize models to create the following relationships between them:
-
-* `Product` belongs to `Category`, and `Category` has many `Product` models, as a category can have multiple products but a product can only belong to one category.
-
-* `Product` belongs to many `Tag` models, and `Tag` belongs to many `Product` models. Allow products to have multiple tags and tags to have many products by using the `ProductTag` through model.
-
-> **Hint:** Make sure you set up foreign key relationships that match the column we created in the respective models.
-
-### Fill Out the API Routes to Perform RESTful CRUD Operations
-
-Fill out the unfinished routes in `product-routes.js`, `tag-routes.js`, and `category-routes.js` to perform create, read, update, and delete operations using your Sequelize models.
-
-Note that the functionality for creating the many-to-many relationship for products has already been completed for you.
-
-> **Hint**: Be sure to look at the mini-project code for syntax help and use your model's column definitions to figure out what `req.body` will be for POST and PUT routes!
-
-### Seed the Database
-
-After creating the models and routes, run `npm run seed` to seed data to your database so that you can test your routes.
-
-### Sync Sequelize to the Database on Server Start
-
-Create the code needed in `server.js` to sync the Sequelize models to the MySQL database on server start.
-
-* The GitHub repository containing your application code.
-* Vid requirements:
-1) demonstrates the functionality of the e-commerce back end must be submitted, and a link to the video should be included in your readme file.
-2) show all of the technical acceptance criteria being met.
-3) demonstrate how to create the schema from the MySQL shell.
-4) Demonstrate how to seed the database from the command line.
-5) demonstrate how to start the application’s server.
-6) demonstrate GET routes for all categories, all products, and all tags being tested in Insomnia.
-7) demonstrate GET routes for a single category, a single product, and a single tag being tested in Insomnia.
-8) demonstrate POST, PUT, and DELETE routes for categories, products, and tags being tested in Insomnia.
-
-SUBMIT 1) A walkthrough video demonstrating the functionality of the application and all of the acceptance criteria being met.
-       2) The URL of the GitHub repository. Give the repository a unique name and include a readme describing the project.
-
-### Technical Acceptance Criteria: 40%
-
-* Satisfies all of the preceding acceptance criteria plus the following:
-
-  * Connects to a MySQL database using the [MySQL2](https://www.npmjs.com/package/mysql) and [Sequelize](https://www.npmjs.com/package/sequelize) packages.
-
-  * Stores sensitive data, like a user’s MySQL username, password, and database name, using environment variables through the [dotenv](https://www.npmjs.com/package/dotenv) package.
-
-  * Syncs Sequelize models to a MySQL database on the server start.
-
-  * Includes column definitions for all four models outlined in the Challenge instructions.
-
-  * Includes model associations outlined in the Challenge instructions.
-
-### Repository Quality: 13%
-
-* Repository has a unique name.
-
-* Repository follows best practices for file structure and naming conventions.
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages.
-
-* Repository contains quality readme with description and a link to a walkthrough video.
+## Questions? Contact the Developer on GitHub... 
+KPL33
+## ...or via Email
+kevinsname2003@yahoo.com

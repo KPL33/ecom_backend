@@ -27,7 +27,7 @@ Product.init(
       type: DataTypes.STRING,
       allowNull: false
     },
-    //Here, we do want the 'price' to be an 'INTEGER', but we also want control over both its "math base" (10, in our case) and the number of decimals in the price (2).
+    //Here, we do want the 'price' to be an 'INTEGER', but we also want control over both its "math base" (10, in our case, which allows integers of 0–9 to be used) and the number of decimals in the price (2).
     price: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,

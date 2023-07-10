@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-//Similar to the above, we establish a 'route' that can return a single 'Tag' when we query (accessed by using the '/tags' endpoint followed by '/' and the the 'id' number assigned to the 'Tag' being queried). We also provide a message that will show, in the event that the 'Tag' being queried does not exist.
+//Similar to the above, we establish a 'route' that can return a single 'Tag' when we query (accessed by using the '/tags' endpoint followed by '/' and the the 'id' number assigned to the 'Tag' being queried). We also provide a message that will show in the event that the 'Tag' being queried does not exist.
 router.get('/:id', async (req, res) => {
   try {
     const tagData = await Tag.findByPk(req.params.id, {
@@ -64,7 +64,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-//Here, we enable the user to delete (aka, 'destroy) an existing 'Tag' by querying the database with that 'Tag's 'id'. We also we provide a 'catch' block that returns a 'status 404' 'err'or 'res'ponse, in the event that the user queries for a 'Tag' that does not yet exist in the database and a 'status 500' 'err'or, in the event that anything else goes awry.
+//Here, we enable the user to delete (aka, 'destroy) an existing 'Tag' by querying the database with that 'Tag's 'id'. We also provide a 'catch' block that returns a 'status 404' 'err'or 'res'ponse, in the event that the user queries for a 'Tag' that does not yet exist in the database and a 'status 500' 'err'or, in the event that anything else goes awry.
 router.delete('/:id', async (req, res) => {
   try {
     const tagData = await Tag.destroy({
