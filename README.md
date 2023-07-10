@@ -38,11 +38,11 @@ To interact with the database, open an API client (Insomnia or similar) and use 
 </br>
 
 ## Static Screen-Captures of the Application
-![mysql running in termial](./assets/example1.png)
+![mysql running in termial](./Assets/example1.png)
 ##
-![npm run seed entered in termial](./assets/example2.png)
+![npm run seed entered in termial](./Assets/example2.png)
 ##
-![View routes through Insomnia](./assets/example3.png)
+![View routes through Insomnia](./Assets/example3.png)
 </br>
 
 ## Application Demo Video
